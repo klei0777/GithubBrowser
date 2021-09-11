@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main">
-
+    android:id="@+id/linearLayout1">
     <TextView
-        android:layout_width="wrap_content"
+        android:text="Github Browser"
+        android:textAlignment="center"
+        android:textSize="@dimen/abc_text_size_display_1_material"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Hello World!" />
-
-</RelativeLayout>
+        android:id="@+id/textViewTitle"
+        android:paddingTop="80dp"
+        android:paddingBottom="20dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/linearLayout2" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/appCompatTextViewOwner"
+            android:text="Owner"
+            android:gravity="center"
+            android:width="80dp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/appCompatEditTextOwner"
+            android:text="klei0777"
+            android:width="200dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/linearLayout2" >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/appCompatTextViewName"
+            android:text="Name"
+            android:gravity="center"
+            android:width="80dp" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/appCompatEditTextName"
+            android:text="GithubBrowser"
+            android:width="200dp" />
+    </LinearLayout>
+</LinearLayout>
