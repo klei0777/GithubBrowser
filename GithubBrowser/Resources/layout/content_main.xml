@@ -40,18 +40,24 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/linearLayout2" >
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/appCompatTextViewName"
             android:text="Name"
             android:gravity="center"
             android:width="80dp" />
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/appCompatEditTextName"
             android:text="GithubBrowser"
             android:width="200dp" />
     </LinearLayout>
+    <ImageView
+        android:src="@drawable/github"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView1"
+        android:padding="30dp" />
 </LinearLayout>
