@@ -40,6 +40,8 @@ namespace GithubBrowser
         {
             var client = new GitHubClient(new ProductHeaderValue(repoOwner));
 
+            client.Credentials = new Credentials(Token);
+
             return new List<GitHubCommit>();
         }
 	}
