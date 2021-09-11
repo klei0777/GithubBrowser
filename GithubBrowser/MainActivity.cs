@@ -12,6 +12,13 @@ namespace GithubBrowser
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        /// <summary>
+        /// Specifies a token that can read commit status and access public repositories. The token was
+        /// created on 9/11/21 and will expire on 10/11/21. I wouldn't normally put tokens in the code
+        /// and commit them to source control, but for this test application I'll make an exception.
+        /// </summary>
+        private const string Token = "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";
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
