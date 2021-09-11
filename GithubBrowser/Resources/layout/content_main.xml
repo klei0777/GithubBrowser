@@ -23,14 +23,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/appCompatTextViewOwner"
+            android:id="@+id/textViewOwner"
             android:text="Owner"
             android:gravity="center"
             android:width="80dp" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/appCompatEditTextOwner"
+            android:id="@+id/editTextOwner"
             android:text="klei0777"
             android:width="200dp" />
     </LinearLayout>
@@ -43,14 +43,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/appCompatTextViewName"
+            android:id="@+id/textViewName"
             android:text="Name"
             android:gravity="center"
             android:width="80dp" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/appCompatEditTextName"
+            android:id="@+id/editTextName"
             android:text="GithubBrowser"
             android:width="200dp" />
     </LinearLayout>

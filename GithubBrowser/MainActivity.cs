@@ -1,6 +1,11 @@
 ﻿using Android.App;
 using Android.OS;
+using Android.Widget;
 using AndroidX.AppCompat.App;
+using Octokit;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GithubBrowser
 {
@@ -11,6 +16,24 @@ namespace GithubBrowser
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+
+            var buttonShowCommits = FindViewById<Button>(Resource.Id.buttonShowCommits);
+            buttonShowCommits.Click += ButtonShowCommits_Click;
+        }
+
+        private async void ButtonShowCommits_Click(object sender, EventArgs e)
+        {
+            string repoOwner = FindViewById<EditText>(Resource.Id.editTextOwner).Text;
+            string repoName = FindViewById<EditText>(Resource.Id.editTextName).Text;
+
+            var commits = await GetMostRecentCommits(repoOwner, repoName);
+        }
+
+        private async Task<List<GitHubCommit>> GetMostRecentCommits(string repoOwner, string repoName)
+        {
+            var client = new GitHubClient(new ProductHeaderValue(repoOwner));
+
+            return new List<GitHubCommit>();
         }
 	}
 }
