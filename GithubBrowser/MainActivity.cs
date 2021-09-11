@@ -1,7 +1,10 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using GithubBrowser.Model;
+using Newtonsoft.Json;
 using Octokit;
 using System;
 using System.Collections.Generic;
@@ -18,8 +21,7 @@ namespace GithubBrowser
         /// created on 9/11/21 and will expire on 10/11/21. I wouldn't normally put tokens in the code
         /// and commit them to source control, but for this test application I'll make an exception.
         /// </summary>
-        //private const string Token = "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";
-        private const string Token = "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";
+        private const string Token = "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";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,7 +39,10 @@ namespace GithubBrowser
 
             var commits = await GetMostRecentCommits(repoOwner, repoName, 14);
 
-            StartActivity(typeof(CommitsActivity));
+            var commitModels = commits.Select(o => new CommitModel(o.Commit.Author.Name, o.Sha, o.Commit.Message));
+            var intent = new Intent(this, typeof(CommitsActivity));
+            intent.PutExtra("commits", JsonConvert.SerializeObject(commitModels));
+            StartActivity(intent);
         }
 
         private async Task<List<GitHubCommit>> GetMostRecentCommits(string repoOwner, string repoName, int days)
