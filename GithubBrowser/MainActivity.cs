@@ -5,6 +5,7 @@ using AndroidX.AppCompat.App;
 using Octokit;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GithubBrowser
@@ -17,7 +18,7 @@ namespace GithubBrowser
         /// created on 9/11/21 and will expire on 10/11/21. I wouldn't normally put tokens in the code
         /// and commit them to source control, but for this test application I'll make an exception.
         /// </summary>
-        private const string Token = "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";
+        private const string Token = "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";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -42,7 +43,26 @@ namespace GithubBrowser
 
             client.Credentials = new Credentials(Token);
 
-            return new List<GitHubCommit>();
+            var repository = await client.Repository.Commit.GetAll(repoOwner, repoName);
+            var getCommitDetail = repository.Select(async (o) =>
+            {
+                return await client.Repository.Commit.Get(repoOwner, repoName, o.Sha);
+            }).ToList();
+            var commits = await Task.WhenAll(getCommitDetail);
+
+            OutputGithubApiRateInfo(client);
+
+            return commits.ToList();
+        }
+
+        private void OutputGithubApiRateInfo(GitHubClient client)
+        {
+            var apiInfo = client.GetLastApiInfo();
+            var rateLimit = apiInfo?.RateLimit;
+
+            Console.WriteLine($"Github requests per hour: {rateLimit?.Limit}");
+            Console.WriteLine($"Github requests remaining: {rateLimit?.Remaining}");
+            Console.WriteLine($"Github request resets at: {rateLimit?.Reset.ToLocalTime()}");
         }
 	}
 }
