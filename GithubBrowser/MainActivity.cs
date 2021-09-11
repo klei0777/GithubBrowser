@@ -34,16 +34,21 @@ namespace GithubBrowser
             string repoOwner = FindViewById<EditText>(Resource.Id.editTextOwner).Text;
             string repoName = FindViewById<EditText>(Resource.Id.editTextName).Text;
 
-            var commits = await GetMostRecentCommits(repoOwner, repoName);
+            var commits = await GetMostRecentCommits(repoOwner, repoName, 14);
         }
 
-        private async Task<List<GitHubCommit>> GetMostRecentCommits(string repoOwner, string repoName)
+        private async Task<List<GitHubCommit>> GetMostRecentCommits(string repoOwner, string repoName, int days)
         {
             var client = new GitHubClient(new ProductHeaderValue(repoOwner));
 
             client.Credentials = new Credentials(Token);
 
-            var repository = await client.Repository.Commit.GetAll(repoOwner, repoName);
+            var commitRequest = new CommitRequest()
+            {
+                Since = DateTime.Now.Subtract(new TimeSpan(days, 0, 0, 0))
+            };
+
+            var repository = await client.Repository.Commit.GetAll(repoOwner, repoName, commitRequest);
             var getCommitDetail = repository.Select(async (o) =>
             {
                 return await client.Repository.Commit.Get(repoOwner, repoName, o.Sha);
