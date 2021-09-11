@@ -18,7 +18,8 @@ namespace GithubBrowser
         /// created on 9/11/21 and will expire on 10/11/21. I wouldn't normally put tokens in the code
         /// and commit them to source control, but for this test application I'll make an exception.
         /// </summary>
-        private const string Token = "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";
+        //private const string Token = "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";
+        private const string Token = "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";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,6 +36,8 @@ namespace GithubBrowser
             string repoName = FindViewById<EditText>(Resource.Id.editTextName).Text;
 
             var commits = await GetMostRecentCommits(repoOwner, repoName, 14);
+
+            StartActivity(typeof(CommitsActivity));
         }
 
         private async Task<List<GitHubCommit>> GetMostRecentCommits(string repoOwner, string repoName, int days)
