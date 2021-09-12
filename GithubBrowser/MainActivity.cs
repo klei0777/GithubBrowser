@@ -18,13 +18,33 @@ namespace GithubBrowser
     {
         private static readonly char[] tokenBytes = new char[] { 'g', 'h', 'p', '_', 'B', '4', 'i', 'n', 'k', 'k', 'w', 'X', 'q', 'a', '6', 'I', 't', 'u', 'r', 'F', '2', '6', 'v', 'W', 'A', 'I', 'e', 'I', 'G', 'l', 'r', 'f', 'U', '5', '1', 'h', 'Q', 'w', 'k', 'O' };
 
+        private EditText editTextOwner;
+        private EditText editTextName;
+        private Button buttonShowCommits;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
 
-            var buttonShowCommits = FindViewById<Button>(Resource.Id.buttonShowCommits);
+            editTextOwner = FindViewById<EditText>(Resource.Id.editTextOwner);
+            editTextOwner.TextChanged += EditText_TextChanged;
+
+            editTextName = FindViewById<EditText>(Resource.Id.editTextName);
+            editTextName.TextChanged += EditText_TextChanged;
+
+            buttonShowCommits = FindViewById<Button>(Resource.Id.buttonShowCommits);
             buttonShowCommits.Click += ButtonShowCommits_Click;
+        }
+
+        private void UpdateView()
+        {
+            buttonShowCommits.Enabled = editTextOwner.Length() > 0 && editTextName.Length() > 0;
+        }
+
+        private void EditText_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            UpdateView();
         }
 
         private async void ButtonShowCommits_Click(object sender, EventArgs e)
