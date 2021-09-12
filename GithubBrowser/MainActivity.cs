@@ -69,6 +69,12 @@ namespace GithubBrowser
                 return;
             }
 
+            if (commits.Count == 0)
+            {
+                ShowAlertDialog("Error", $"No commits found at github.com/{repoOwner}/{repoName}", this);
+                return;
+            }
+
             var commitModels = commits.Select(o => new CommitModel(o.Commit.Author.Name, o.Sha, o.Commit.Message));
             var intent = new Intent(this, typeof(CommitsActivity));
             intent.PutExtra("commits", JsonConvert.SerializeObject(commitModels));
