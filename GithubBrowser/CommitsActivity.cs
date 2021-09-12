@@ -18,6 +18,12 @@ namespace GithubBrowser
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.commits);
 
+            string owner = "owner";
+            string name = "name";
+
+            var textViewHeader = FindViewById<TextView>(Resource.Id.textViewCommitHeader);
+            textViewHeader.Text = $"Commits for github.com/{owner}/{name}";
+
             List<CommitModel> commits = JsonConvert.DeserializeObject<List<CommitModel>>(Intent.GetStringExtra("commits"));
 
             var listView = FindViewById<ListView>(Resource.Id.listViewCommits);
