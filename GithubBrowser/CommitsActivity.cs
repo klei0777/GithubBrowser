@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace GithubBrowser
 {
-    [Activity(Label = "CommitsActivity")]
+    [Activity(Label = "CommitsActivity", Theme ="@style/AppTheme.NoActionBar")]
     public class CommitsActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
