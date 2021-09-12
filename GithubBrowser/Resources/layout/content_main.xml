@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextOwner"
             android:text="klei0777"
-            android:width="200dp" />
+            android:width="200dp"
+            android:singleLine="true" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -52,7 +53,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextName"
             android:text="GithubBrowser"
-            android:width="200dp" />
+            android:width="200dp"
+            android:singleLine="true" />
     </LinearLayout>
     <ImageView
         android:src="@drawable/github"
