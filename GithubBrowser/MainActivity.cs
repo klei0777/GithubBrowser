@@ -52,7 +52,22 @@ namespace GithubBrowser
             string repoOwner = FindViewById<EditText>(Resource.Id.editTextOwner).Text;
             string repoName = FindViewById<EditText>(Resource.Id.editTextName).Text;
 
-            var commits = await GetMostRecentCommits(repoOwner, repoName, 14);
+            List<GitHubCommit> commits = null;
+
+            try
+            {
+                commits = await GetMostRecentCommits(repoOwner, repoName, 14);
+            }
+            catch (NotFoundException)
+            {
+                ShowAlertDialog("Error", $"No repository found at github.com/{repoOwner}/{repoName}", this);
+                return;
+            }
+            catch (Exception ex)
+            {
+                ShowAlertDialog("Error", ex.Message, this);
+                return;
+            }
 
             var commitModels = commits.Select(o => new CommitModel(o.Commit.Author.Name, o.Sha, o.Commit.Message));
             var intent = new Intent(this, typeof(CommitsActivity));
@@ -95,5 +110,19 @@ namespace GithubBrowser
             Console.WriteLine($"Github requests remaining: {rateLimit?.Remaining}");
             Console.WriteLine($"Github request resets at: {rateLimit?.Reset.ToLocalTime()}");
         }
-	}
+
+        private void ShowAlertDialog(string title, string message, Context context)
+        {
+            Android.App.AlertDialog.Builder dialog = new Android.App.AlertDialog.Builder(context);
+            Android.App.AlertDialog alert = dialog.Create();
+            alert.SetTitle(title);
+            alert.SetMessage(message);
+
+            alert.SetButton("OK", (c, ev) =>
+            {
+                // Ok button click task  
+            });
+            alert.Show();
+        }
+    }
 }
