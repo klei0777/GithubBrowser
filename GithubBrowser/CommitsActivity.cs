@@ -18,8 +18,8 @@ namespace GithubBrowser
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.commits);
 
-            string owner = "owner";
-            string name = "name";
+            string owner = Intent.GetStringExtra("owner");
+            string name = Intent.GetStringExtra("name");
 
             var textViewHeader = FindViewById<TextView>(Resource.Id.textViewCommitHeader);
             textViewHeader.Text = $"Commits for github.com/{owner}/{name}";

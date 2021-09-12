@@ -37,6 +37,8 @@ namespace GithubBrowser
             var commitModels = commits.Select(o => new CommitModel(o.Commit.Author.Name, o.Sha, o.Commit.Message));
             var intent = new Intent(this, typeof(CommitsActivity));
             intent.PutExtra("commits", JsonConvert.SerializeObject(commitModels));
+            intent.PutExtra("owner", repoOwner);
+            intent.PutExtra("name", repoName);
             StartActivity(intent);
         }
 
