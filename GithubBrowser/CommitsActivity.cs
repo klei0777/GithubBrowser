@@ -56,9 +56,11 @@ namespace GithubBrowser
                 View view = convertView;
                 if (view == null)
                 {
-                    view = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
+                    view = context.LayoutInflater.Inflate(Resource.Layout.commit_list_item, null);
                 }
-                view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = items[position].Message;
+                view.FindViewById<TextView>(Resource.Id.textViewMessage).Text = items[position].Message;
+                view.FindViewById<TextView>(Resource.Id.textViewAuthor).Text = items[position].Author;
+                view.FindViewById<TextView>(Resource.Id.textViewHash).Text = items[position].Sha;
                 return view;
             }
         }
